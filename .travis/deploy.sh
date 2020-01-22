@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-./gradlew publishToSonatype \
+./gradlew publishToSonatype --stacktrace \
     -POSSRH_USERNAME=${OSSRH_USERNAME} \
     -POSSRH_PASSWORD=${OSSRH_PASSWORD} \
     -Psigning.keyId=${GPG_KEY_ID} \
