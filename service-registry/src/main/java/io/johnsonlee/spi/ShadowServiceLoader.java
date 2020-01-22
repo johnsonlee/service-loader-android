@@ -1,10 +1,14 @@
 package io.johnsonlee.spi;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ServiceLoader;
 
 /**
+ * Represents a shadow of {@link ServiceLoader}
+ *
+ * @param <S> The type of service
  * @author johnsonlee
  */
 public final class ShadowServiceLoader<S> implements Iterable<S> {
@@ -15,12 +19,12 @@ public final class ShadowServiceLoader<S> implements Iterable<S> {
 
     private ShadowServiceLoader(final Class<S> service) {
         this.service = service;
-        this.providers = new ArrayList<>(ServiceRegistry.get(service));
+        this.providers = Collections.unmodifiableList(ServiceRegistry.get(service));
     }
 
     @Override
     public Iterator<S> iterator() {
-        return ServiceRegistry.get(service).iterator();
+        return this.providers.iterator();
     }
 
     public void reload() {
