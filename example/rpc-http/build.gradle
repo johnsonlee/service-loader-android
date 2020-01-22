@@ -1,0 +1,10 @@
+apply plugin: 'java-library'
+
+dependencies {
+    annotationProcessor "io.johnsonlee.spi:service-compiler:1.0.0"
+    api project(":rpc-spi")
+    api "com.google.auto.service:auto-service-annotations:1.0-rc6"
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"

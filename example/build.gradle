@@ -1,0 +1,54 @@
+buildscript {
+    ext.kotlin_version = "1.3.50"
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle:3.5.0")
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath("com.didiglobal.booster:booster-gradle-plugin:1.3.1")
+        classpath("io.johnsonlee.spi:booster-transform-service-loader:1.0.0")
+    }
+}
+
+allprojects {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        google()
+        jcenter()
+    }
+}
+
+apply plugin: "com.android.application"
+apply plugin: "kotlin-android"
+apply plugin: "kotlin-android-extensions"
+apply plugin: 'kotlin-kapt'
+apply plugin: "com.didiglobal.booster"
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "io.johnsonlee.example.spi"
+        minSdkVersion 26
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    kapt "io.johnsonlee.spi:service-compiler:1.0.0"
+    implementation "androidx.appcompat:appcompat:1.0.0"
+    implementation project(":rpc-http")
+    implementation project(":rpc-push")
+}
